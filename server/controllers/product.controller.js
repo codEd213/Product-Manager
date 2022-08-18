@@ -7,6 +7,18 @@ module.exports.createProduct = (req, res) => {
 };
 module.exports.getProducts = (req, res) => {
   Product.find({})
-    .then((product) => res.json(product))
+    .then((product) => {
+      console.log(product);
+      res.json(product);
+    })
+    .catch((err) => {
+      console.log(err);
+      response.json(err);
+    });
+};
+
+module.exports.getProduct = (req, res) => {
+  Product.findOne({ _id: req.params.id })
+    .then((person) => res.json(person))
     .catch((err) => console.log(err));
 };
